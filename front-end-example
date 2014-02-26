@@ -1,17 +1,47 @@
 <header>
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/themes/smoothness/jquery-ui.css" />
+<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+
+<script>
+
+	$('body').on({
+		mouseenter: function(){
+			$(this).stop().css('background-color','rgb(243, 243, 243)');
+			$(this).find('.rank_number').animate({'opacity':'1'},400);
+			},
+		mouseleave: function(){
+			$(this).stop().css('background-color','white');
+			$(this).find('.rank_number').stop().css('opacity','0');
+			}
+		},'.cell')
+	
+	
+</script>
+
 	<style>
+	
+	body {margin:0;}
+	
+	div {color:#6d6d6d; font-family: Segoe UI, Arial, Helvetica, sans-serif;"}
 	
 	#header {padding:40px 0;}
 	#header div {display:inline;}
 	
 	#content {margin-top:-25px;}
 	
-	.cell {height:150px; width:100%; padding:25px 0; display:inline-block; position:relative;}
+	.cell {height:150px; width:100%; padding:25px 0;}
+	.content_centering {max-width:925px; margin:0 auto; position:relative;}
+	
+	.rank_container {position:absolute; left:-100px; width:100px; height:100%;}
+	.rank_number {opacity:0; text-align: center; margin: auto; position: absolute; top: 0; left: 0; bottom: 0; right: 0; line-height: 150px; font-size:30pt; color:rgb(226, 226, 226);}
+	
 	
 	.picture {display:inline-block; vertical-align:top; padding-right:25px;}
 	.picture img {border: 1px #EBEBEB solid;}
 	
-	.data {display:inline-block; width:calc(100% - 125px); position: absolute; height: 110px; margin:auto; top:0; bottom:0;}
+	.data {display:inline-block; width:calc(100% - 125px); position: absolute; height: 95px; margin:auto; top:0; bottom:0;}
 	
 	.data-top {padding-bottom:15px;}
 	.data-mid {padding-bottom:15px; width:100%; font-size:0px;}
@@ -20,16 +50,19 @@
 	
 	.bars {height:25px; display:inline-block;}
 	
-	div {color:#6d6d6d; font-family: Segoe UI, Arial, Helvetica, sans-serif;"}
+	
+	.divider {width:100%; background-color:#d6d6d6; height:1px; margin:20px 0;}
+    .divider_positioner{width:925px; margin:0 auto;}
+	.divider_number{margin-top: -12px; position: absolute; background: white; padding: 0 20px; margin-left: -20px; color: rgb(206, 206, 206);}
         
     </style>
 </header>
 
 <body>
 
-	<div id="center" style="max-width:925px; margin:0 auto; padding:0 10px;">
+	<div id="center">
     	
-        <div id="header">
+        <div id="header" style="max-width:925px; margin:0 auto;">
         
         	<div id="logo" style="font-size:24pt; color:black; padding-right:50px;">
             	A / R
@@ -54,57 +87,63 @@
         	
             <!------ TEMPLATE BEGINS -------> 
             <div class="cell" style="">
-            	
-                <!-- Poster --> 
-                <div class="picture" style="">
-                	<img style="width:100px;" src="http://stuffpoint.com/bakemonogatari/image/113209-bakemonogatari-bakemonogatari-poster.jpg" />                   </div>
-                    
-                <!-- Data set
+            	<div class="content_centering">
                 
-                Uses "calc()" for resolution responsiveness, not much support but best method so far without using JS
+                	<!-- Ranking Number --> 
+                	<div class="rank_container">
+                    	<div class="rank_number">1</div>
+                    </div>
                 
-                -->    
-                <div class="data" style="">
-                	<div class="data-top" style="">                    
-                    	<!-- Title --> 
-                    	<div style="font-size:13pt;">
-                        	Bakemonogatari
+                    <!-- Art --> 
+                    <div class="picture" style="">
+                        <img style="width:100px;" src="http://iv1.lisimg.com/image/708222/600full-bakemonogatari-poster.jpg" />                   </div>
+                        
+                    <!-- Data set
+                    
+                    Uses "calc()" for resolution responsiveness, not much support but best method so far without using JS
+                    
+                    -->    
+                    <div class="data" style="">
+                        <div class="data-top" style="">                    
+                            <!-- Title --> 
+                            <div style="font-size:13pt;">
+                                Bakemonogatari
+                            </div>
+                        </div>
+                        
+                        <!-- Score Bar 
+                        
+                        Currently: 100% width -> positive/negative -> split into two sections sections that's relative to positive/negative's 100%
+                        
+                        Pretty complicated, requires many calculation. Consider changing.
+                        --> 
+                        <div class="data-mid" >
+                            
+                            <div class="positives">
+                                <div class="bars" style="width:calc(60% - 0.25%); background:#66b968;"></div>
+                                <div class="bars" style="width:calc(20% - 0.25%); background:#cee9b2;"></div>
+                            </div>
+                            
+                            <div class="seperator" style="width:1%; display:inline-block;"></div>
+                            
+                            <div class="negatives" style="opacity:0.1;">
+                                <div class="bars" style="width:calc(15% - 0.25%); background:#ee5164;"></div>
+                                <div class="bars" style="width:calc(5% - 0.25%); background:#c70219;"></div>
+                            </div>
+                            
+                        </div>
+                        
+                        <!-- Misc Data--> 
+                        <div class="data-bottom" style="font-size:9pt;">
+                            <div>
+                                <span>Ranking:</span>
+                                <span style="color:#66b968;">+2</span>
+                            </div>
                         </div>
                     </div>
-                    
-                    <!-- Score Bar 
-                    
-                    Currently: 100% width -> positive/negative -> split into two sections sections that's relative to positive/negative's 100%
-                    
-                    Pretty complicated, requires many calculation. Consider changing.
-                    --> 
-                	<div class="data-mid" >
-                        
-                        <div class="positives">
-                            <div class="bars" style="width:calc(60% - 0.25%); background:#66b968;"></div>
-                            <div class="bars" style="width:calc(20% - 0.25%); background:#cee9b2;"></div>
-                        </div>
-                        
-                        <div class="seperator" style="width:1%; display:inline-block;"></div>
-                        
-                        <div class="negatives" style="opacity:0.1;">
-                            <div class="bars" style="width:calc(15% - 0.25%); background:#ee5164;"></div>
-                            <div class="bars" style="width:calc(5% - 0.25%); background:#c70219;"></div>
-                        </div>
-                        
-                    </div>
-                    
-                    <!-- Misc Data--> 
-                    <div class="data-bottom" style="font-size:9pt;">
-                    	<div>
-                            <span>Ranking:</span>
-                            <span style="color:#66b968;">+2</span>
-                        </div>
-                    </div>
-                </div>
                 	
                 
-            	
+            	</div>
             </div>
             
             <!-- END template--> 
@@ -112,7 +151,11 @@
             
               <!------ TEMPLATE BEGINS -------> 
             <div class="cell" style="">
-            	
+            	<div class="content_centering">
+                	<!-- Ranking Number --> 
+                	<div class="rank_container">
+                    	<div class="rank_number">2</div>
+                    </div>
                 <!-- Poster --> 
                 <div class="picture" style="">
                 	<img style="width:100px;" src="http://anilist.co/img/dir/anime/reg/20488.jpg" />                   </div>
@@ -163,12 +206,19 @@
                 	
                 
             	
+                
+            	</div>
             </div>
             
             <!-- END template--> 
             
               <!------ TEMPLATE BEGINS -------> 
             <div class="cell" style="">
+            	<div class="content_centering">
+                	<!-- Ranking Number --> 
+                	<div class="rank_container">
+                    	<div class="rank_number">3</div>
+                    </div>
             	
                 <!-- Poster --> 
                 <div class="picture" style="">
@@ -220,13 +270,20 @@
                 	
                 
             	
+                
+            	</div>
             </div>
             
             <!-- END template--> 
             
+            
               <!------ TEMPLATE BEGINS -------> 
             <div class="cell" style="">
-            	
+            	<div class="content_centering">
+                	<!-- Ranking Number --> 
+                	<div class="rank_container">
+                    	<div class="rank_number">4</div>
+                    </div>
                 <!-- Poster --> 
                 <div class="picture" style="">
                 	<img style="width:100px;" src="http://anilist.co/img/dir/anime/reg/18679.jpg" />                   </div>
@@ -254,14 +311,14 @@
                         
                         <div class="positives">
                             <div class="bars" style="width:calc(10% - 0.25%); background:#66b968;"></div>
-                            <div class="bars" style="width:calc(20% - 0.25%); background:#cee9b2;"></div>
+                            <div class="bars" style="width:calc(50% - 0.25%); background:#cee9b2;"></div>
                         </div>
                         
                         <div class="seperator" style="width:1%; display:inline-block;"></div>
                         
                         <div class="negatives" style="opacity:0.1;">
                             <div class="bars" style="width:calc(20% - 0.25%); background:#ee5164;"></div>
-                            <div class="bars" style="width:calc(50% - 0.25%); background:#c70219;"></div>
+                            <div class="bars" style="width:calc(20% - 0.25%); background:#c70219;"></div>
                         </div>
                         
                     </div>
@@ -277,9 +334,364 @@
                 	
                 
             	
+                
+            	</div>
             </div>
             
             <!-- END template--> 
+            
+            
+            
+                        
+              <!------ TEMPLATE BEGINS -------> 
+            <div class="cell" style="">
+            	<div class="content_centering">
+                	<!-- Ranking Number --> 
+                	<div class="rank_container">
+                    	<div class="rank_number">5</div>
+                    </div>
+                <!-- Poster --> 
+                <div class="picture" style="">
+                	<img style="width:100px;" src="http://anilist.co/img/dir/anime/reg/20503.jpg" />                   </div>
+                    
+                <!-- Data set
+                
+                Uses "calc()" for resolution responsiveness, not much support but best method so far without using JS
+                
+                -->    
+                <div class="data" style="">
+                	<div class="data-top" style="">                    
+                    	<!-- Title --> 
+                    	<div style="font-size:13pt;">
+                        	Witch Craft Works
+                        </div>
+                    </div>
+                    
+                    <!-- Score Bar 
+                    
+                    Currently: 100% width -> positive/negative -> split into two sections sections that's relative to positive/negative's 100%
+                    
+                    Pretty complicated, requires many calculation. Consider changing.
+                    --> 
+                	<div class="data-mid" >
+                        
+                        <div class="positives">
+                            <div class="bars" style="width:calc(30% - 0.25%); background:#66b968;"></div>
+                            <div class="bars" style="width:calc(10% - 0.25%); background:#cee9b2;"></div>
+                        </div>
+                        
+                        <div class="seperator" style="width:1%; display:inline-block;"></div>
+                        
+                        <div class="negatives" style="opacity:0.1;">
+                            <div class="bars" style="width:calc(20% - 0.25%); background:#ee5164;"></div>
+                            <div class="bars" style="width:calc(40% - 0.25%); background:#c70219;"></div>
+                        </div>
+                        
+                    </div>
+                    
+                    <!-- Misc Data--> 
+                    <div class="data-bottom" style="font-size:9pt;">
+                    	<div>
+                            <span>Ranking:</span>
+                            <span style="color:#c70219;">-2</span>
+                        </div>
+                    </div>
+                </div>
+                	
+                
+            	
+                
+            	</div>
+            </div>
+            
+            <!-- END template--> 
+            
+            
+            
+              <!------ DIVIDER -------> 
+            
+            <div class="divider">
+            	<div class="divider_positioner"> 
+                	<div class="divider_number"> 5 + </div>
+                </div>
+            </div>
+            
+            
+            
+            
+            
+            
+            
+                        
+              <!------ TEMPLATE BEGINS -------> 
+            <div class="cell" style="">
+            	<div class="content_centering">
+                	<!-- Ranking Number --> 
+                	<div class="rank_container">
+                    	<div class="rank_number">6</div>
+                    </div>
+                <!-- Poster --> 
+                <div class="picture" style="">
+                	<img style="width:100px;" src="http://anilist.co/img/dir/anime/reg/18095.jpg" />                   </div>
+                    
+                <!-- Data set
+                
+                Uses "calc()" for resolution responsiveness, not much support but best method so far without using JS
+                
+                -->    
+                <div class="data" style="">
+                	<div class="data-top" style="">                    
+                    	<!-- Title --> 
+                    	<div style="font-size:13pt;">
+                        	Nourin
+                        </div>
+                    </div>
+                    
+                    <!-- Score Bar 
+                    
+                    Currently: 100% width -> positive/negative -> split into two sections sections that's relative to positive/negative's 100%
+                    
+                    Pretty complicated, requires many calculation. Consider changing.
+                    --> 
+                	<div class="data-mid" >
+                        
+                        <div class="positives">
+                            <div class="bars" style="width:calc(30% - 0.25%); background:#66b968;"></div>
+                            <div class="bars" style="width:calc(10% - 0.25%); background:#cee9b2;"></div>
+                        </div>
+                        
+                        <div class="seperator" style="width:1%; display:inline-block;"></div>
+                        
+                        <div class="negatives" style="opacity:0.1;">
+                            <div class="bars" style="width:calc(20% - 0.25%); background:#ee5164;"></div>
+                            <div class="bars" style="width:calc(40% - 0.25%); background:#c70219;"></div>
+                        </div>
+                        
+                    </div>
+                    
+                    <!-- Misc Data--> 
+                    <div class="data-bottom" style="font-size:9pt;">
+                    	<div>
+                            <span>Ranking:</span>
+                            <span style="color:#c70219;">-1</span>
+                        </div>
+                    </div>
+                </div>
+                	
+                
+            	
+                
+            	</div>
+            </div>
+            
+            <!-- END template--> 
+            
+            
+            
+            
+            
+            
+                        
+              <!------ TEMPLATE BEGINS -------> 
+            <div class="cell" style="">
+            	<div class="content_centering">
+                	<!-- Ranking Number --> 
+                	<div class="rank_container">
+                    	<div class="rank_number">7</div>
+                    </div>
+                <!-- Poster --> 
+                <div class="picture" style="">
+                	<img style="width:100px;" src="http://anilist.co/img/dir/anime/reg/20053.jpg" />                   </div>
+                    
+                <!-- Data set
+                
+                Uses "calc()" for resolution responsiveness, not much support but best method so far without using JS
+                
+                -->    
+                <div class="data" style="">
+                	<div class="data-top" style="">                    
+                    	<!-- Title --> 
+                    	<div style="font-size:13pt;">
+                        	Wizard Barristers: Benmashi Cecil
+                        </div>
+                    </div>
+                    
+                    <!-- Score Bar 
+                    
+                    Currently: 100% width -> positive/negative -> split into two sections sections that's relative to positive/negative's 100%
+                    
+                    Pretty complicated, requires many calculation. Consider changing.
+                    --> 
+                	<div class="data-mid" >
+                        
+                        <div class="positives">
+                            <div class="bars" style="width:calc(20% - 0.25%); background:#66b968;"></div>
+                            <div class="bars" style="width:calc(20% - 0.25%); background:#cee9b2;"></div>
+                        </div>
+                        
+                        <div class="seperator" style="width:1%; display:inline-block;"></div>
+                        
+                        <div class="negatives" style="opacity:0.1;">
+                            <div class="bars" style="width:calc(20% - 0.25%); background:#ee5164;"></div>
+                            <div class="bars" style="width:calc(40% - 0.25%); background:#c70219;"></div>
+                        </div>
+                        
+                    </div>
+                    
+                    <!-- Misc Data--> 
+                    <div class="data-bottom" style="font-size:9pt;">
+                    	<div>
+                            <span>Ranking:</span>
+                            <span style="color:#c70219;">-3</span>
+                        </div>
+                    </div>
+                </div>
+                	
+                
+            	
+                
+            	</div>
+            </div>
+            
+            <!-- END template--> 
+            
+            
+            
+            
+            
+            
+                        
+              <!------ TEMPLATE BEGINS -------> 
+            <div class="cell" style="">
+            	<div class="content_centering">
+                	<!-- Ranking Number --> 
+                	<div class="rank_container">
+                    	<div class="rank_number">8</div>
+                    </div>
+                <!-- Poster --> 
+                <div class="picture" style="">
+                	<img style="width:100px;" src="http://anilist.co/img/dir/anime/reg/19363.jpg" />                   </div>
+                    
+                <!-- Data set
+                
+                Uses "calc()" for resolution responsiveness, not much support but best method so far without using JS
+                
+                -->    
+                <div class="data" style="">
+                	<div class="data-top" style="">                    
+                    	<!-- Title --> 
+                    	<div style="font-size:13pt;">
+                        	Wizard Barristers: Benmashi Cecil
+                        </div>
+                    </div>
+                    
+                    <!-- Score Bar 
+                    
+                    Currently: 100% width -> positive/negative -> split into two sections sections that's relative to positive/negative's 100%
+                    
+                    Pretty complicated, requires many calculation. Consider changing.
+                    --> 
+                	<div class="data-mid" >
+                        
+                        <div class="positives">
+                            <div class="bars" style="width:calc(14% - 0.25%); background:#66b968;"></div>
+                            <div class="bars" style="width:calc(1% - 0.25%); background:#cee9b2;"></div>
+                        </div>
+                        
+                        <div class="seperator" style="width:1%; display:inline-block;"></div>
+                        
+                        <div class="negatives" style="opacity:0.1;">
+                            <div class="bars" style="width:calc(35% - 0.25%); background:#ee5164;"></div>
+                            <div class="bars" style="width:calc(50% - 0.25%); background:#c70219;"></div>
+                        </div>
+                        
+                    </div>
+                    
+                    <!-- Misc Data--> 
+                    <div class="data-bottom" style="font-size:9pt;">
+                    	<div>
+                            <span>Ranking:</span>
+                            <span style="color:#c70219;">-1</span>
+                        </div>
+                    </div>
+                </div>
+                	
+                
+            	
+                
+            	</div>
+            </div>
+            
+            <!-- END template--> 
+            
+            
+            
+            
+                        
+              <!------ TEMPLATE BEGINS -------> 
+            <div class="cell" style="">
+            	<div class="content_centering">
+                	<!-- Ranking Number --> 
+                	<div class="rank_container">
+                    	<div class="rank_number">9</div>
+                    </div>
+                <!-- Poster --> 
+                <div class="picture" style="">
+                	<img style="width:100px;" src="http://anilist.co/img/dir/anime/reg/19023.jpg" />                   </div>
+                    
+                <!-- Data set
+                
+                Uses "calc()" for resolution responsiveness, not much support but best method so far without using JS
+                
+                -->    
+                <div class="data" style="">
+                	<div class="data-top" style="">                    
+                    	<!-- Title --> 
+                    	<div style="font-size:13pt;">
+                        	Wake Up, Girls!
+                        </div>
+                    </div>
+                    
+                    <!-- Score Bar 
+                    
+                    Currently: 100% width -> positive/negative -> split into two sections sections that's relative to positive/negative's 100%
+                    
+                    Pretty complicated, requires many calculation. Consider changing.
+                    --> 
+                	<div class="data-mid" >
+                        
+                        <div class="positives">
+                            <div class="bars" style="width:calc(10% - 0.25%); background:#66b968;"></div>
+                            <div class="bars" style="width:calc(5% - 0.25%); background:#cee9b2;"></div>
+                        </div>
+                        
+                        <div class="seperator" style="width:1%; display:inline-block;"></div>
+                        
+                        <div class="negatives" style="opacity:0.1;">
+                            <div class="bars" style="width:calc(45% - 0.25%); background:#ee5164;"></div>
+                            <div class="bars" style="width:calc(40% - 0.25%); background:#c70219;"></div>
+                        </div>
+                        
+                    </div>
+                    
+                    <!-- Misc Data--> 
+                    <div class="data-bottom" style="font-size:9pt;">
+                    	<div>
+                            <span>Ranking:</span>
+                            <span style="color:#c70219;">-1</span>
+                        </div>
+                    </div>
+                </div>
+                	
+                
+            	
+                
+            	</div>
+            </div>
+            
+            <!-- END template--> 
+            
+            
             
             	
             </div>
@@ -290,3 +702,9 @@
     </div>
 
 </body>
+<footer>
+
+	
+
+
+</footer>
