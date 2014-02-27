@@ -1,11 +1,45 @@
 <header>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+  <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/themes/smoothness/jquery-ui.css" />
+  <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+  <script>
+                          // 2. This code loads the IFrame Player API code asynchronously.
+                          var tag = document.createElement('script');
+                    
+                          tag.src = "https://www.youtube.com/iframe_api";
+                          var firstScriptTag = document.getElementsByTagName('script')[0];
+                          firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+                    
+                          // 3. This function creates an <iframe> (and YouTube player)
+                          //    after the API code downloads.
+                          var player;
+                          function onYouTubeIframeAPIReady() {
+                            player = new YT.Player('trailer_player', {
+                              videoId: 'udDIkl6z8X0',
+							  playerVars: {'autohide': 1, 'modestbranding':1 },
+                              events: {
+                                'onReady': onPlayerReady,
+                                'onStateChange': onPlayerStateChange
+                              }
+                            });
+                          }
+                    
+                          // 4. The API will call this function when the video player is ready.
+                          function onPlayerReady(event) {
+                          }
 
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-<link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/themes/smoothness/jquery-ui.css" />
-<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
-
-<script>
-
+						  // 5. The API calls this function when the player's state changes.
+						  //    The function indicates that when playing a video (state=1),
+						  //    the player should play for six seconds and then stop.
+						  function onPlayerStateChange(event) {
+							if (event.data == YT.PlayerState.FINISHED) {
+							  $('#infobox_trailer').fadeOut();
+							}
+						  }
+						 
+   </script>
+  <script>
+<!-- Hover and opening overlay -->
 	$('body').on({
 		mouseenter: function(){
 			$(this).stop().css('background-color','rgb(243, 243, 243)');
@@ -14,13 +48,68 @@
 		mouseleave: function(){
 			$(this).stop().css('background-color','white');
 			$(this).find('.rank_number').stop().css('opacity','0');
+			},
+		click: function(){
+			$('body').css('overflow-y','hidden')
+			$('#overlay').fadeIn();
 			}
 		},'.cell')
+			
+
+<!-- Closing Overlay-->
+	$('body').on({
+			click: function(e){
+				if($("#overlay_container").has(e.target).length === 0){			
+					$('#overlay').fadeOut(400);
+					$('body').css('overflow-y','')
+					$('#infobox_trailer').fadeOut();
+					player.stopVideo();	
+				}
+			}
+		}, '#overlay')
+		
+
+<!-- Open trailer + hovering -->
+	$('body').on({
+		mouseenter: function(){
+				$('#poster_overlay').css('opacity','0.5');
+			},
+		mouseleave: function(){
+				$('#poster_overlay').css('opacity','0');
+			},
+		click: function(e){		
+				$('#poster_overlay').css('opacity','0');			
+				setTimeout(function(){$('#infobox_trailer').fadeIn(400,'',initiate_trailer());}, 50);
+			}
+		}, '#infobox_poster')
+
+
+<!-- Close trailer -->
+	$('body').on({
+			click: function(){		
+					$('#infobox_trailer').fadeOut(400,'',player.stopVideo());
+			}
+		}, '#infobox_trailer')
 	
+
+<!-- Close trailer hovering -->
+
+	$('body').on({
+			mouseenter: function(){		
+				$('#trailer_close_button').css('color','#c72109')
+			},
+			mouseleave: function(){		
+				$('#trailer_close_button').css('color','')
+			}
+		}, '#trailer_close_background')
+
+
+function initiate_trailer(){
+	player.playVideo();
+}
 	
 </script>
-
-	<style>
+  <style>
 	
 	body {margin:0;}
 	
@@ -54,113 +143,165 @@
 	.divider {width:100%; background-color:#d6d6d6; height:1px; margin:20px 0;}
     .divider_positioner{width:925px; margin:0 auto;}
 	.divider_number{margin-top: -12px; position: absolute; background: white; padding: 0 20px; margin-left: -20px; color: rgb(206, 206, 206);}
-        
+	
+	#overlay {position: fixed;
+z-index: 100;
+height: 101%;
+width: 100%;
+overflow-y: auto;
+background: rgba(0, 0, 0, .50)}
+
+#overlay_container{
+	
+	width: 800px;
+height: 100%;
+margin: 15px auto;
+font-size: 9pt;
+	
+}
+
+.overlay_block{width:100%; padding:25px; margin-bottom:15px; background:white; position:relative;
+	-webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+          box-sizing: border-box;}
+		  
+.overlay_half_block {padding:25px; margin-bottom:15px; background:white; width:397px; text-align:center; font-size:10pt; display:inline-block;
+	-webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+          box-sizing: border-box;}
+
+#infobox_meta { margin-top:20px; }
+.boxmeta_label {font-weight:800; padding-right:5px;}
+.boxmeta_level {margin-bottom:10px;}
+
+
+#infobox_trailer{display:none;}
+#infobox_trailer_positioner {position:absolute; top:0; left:0; height:100%; width:100%; background:black; z-index:2;  cursor:pointer;}
+#trailer_player {margin:auto; left:0; top:0; right:0; bottom:0; position:absolute; width:596px; height:335px;}
+#trailer_close_background {top:0; left:0; width:100%; height:100%; cursor:pointer;} 
+#trailer_close_button {opacity:0.5; top:0; right: 15px;position: absolute;font-size: 25pt; cursor:pointer;}
+
+#infobox_poster {margin-right:25px; display:inline-block; vertical-align:top; background:black;}
+#poster_overlay {position: absolute; width: 200px; height: 285px; background: black; opacity: 0; line-height: 285px; color: white; text-align: center; font-size: 25pt; cursor:pointer;}
+
     </style>
 </header>
 
-
-
 <body>
 
-	<div id="center">
-    	
-        <div id="header" style="max-width:925px; margin:0 auto;">
+<!--- Overlay BEGIN --->
+<div id="overlay">
+  <div id="overlay_container"> 
+    
+    <!--- Information --->
+    <div id="infobox" class="overlay_block"> 
+      
+      <!--- Trailer --->
+      <div id="infobox_trailer">
+        <div id="infobox_trailer_positioner"> 
+          
+          <!-- 1. The <iframe> (and video player) will replace this <div> tag. -->
+          <div id="trailer_player"></div>
+          <div id="trailer_close_background"></div>
+          <div id="trailer_close_button">&#215;</div>
+        </div>
+      </div>
+      
+      <!--- Poster --->
+      <div id="infobox_poster">
+      	<div id="poster_overlay" style="">
+        	&#9654;
+        </div>
+        <img style="width:200px;" src="http://cdn.myanimelist.net/images/anime/12/36775l.jpg"/>
+      </div>
+      
+      <!--- Texts --->
+      <div id="infobox_texts" style="display:inline-block; width:520px;">
+        <div id="infobox_title" style="font-size:20pt;"> Shinsekai Yori </div>
+        <div id="infobox_description">
+          <p>A millennium from now, in Japan, exists a utopia. The Protagonist, Saki Watanabe, lives in an idyllic village barred from the outside world. Her world is ruled by the people who possess the "gods' power" of psychokinesis. After finally obtaining her own powers, Saki enters the Zenjin Academy to train along with five other children: Satoru Asahina, Maria Akizuki, Mamoru Itou, Shun Aonuma, and Reiko Amano.</p>
+          <p> Not all is as it seems, however. In this utopian village, strange rumors about a monstrous cat that abducts children circulate, and students are said to disappear from the academy. The world and its history are much darker than they appear and humanity is on the verge of collapse.</p>
+        </div>
+        <div id="infobox_meta">
+          <div id="boxmeta_studio" class="boxmeta_level"> <span class="boxmeta_label">Studio:</span> <span class="boxmeta_content">A-1 Pictures</span> </div>
+          <div id="boxmeta_genre" class="boxmeta_level"> <span class="boxmeta_label">Genre:</span> <span class="boxmeta_content">Sci-Fi, Fiction</span> </div>
+          <div id="boxmeta_people" class="boxmeta_level"> <span class="boxmeta_label">Key People:</span> <span class="boxmeta_content">Ishihama Masashi </span> </div>
+        </div>
+      </div>
+    </div>
+    
+    <!--- Download --->
+    <div id="consume_stream" class="overlay_half_block" style="margin-right:3px;"> Stream </div>
+    <div id="consume_download" class="overlay_half_block"> Download </div>
+  </div>
+</div>
+
+<!--- Overlay END --->
+
+<div id="center">
+  <div id="header" style="max-width:925px; margin:0 auto;">
+    <div id="logo" style="font-size:24pt; color:black; padding-right:50px;"> A / R </div>
+    <div id="logo" style="font-size:10.5pt;"> Spring / Week 7 </div>
+    <div> <span> </span> </div>
+  </div>
+  
+  <!--Begin content-->
+  
+  <div id="content" > 
+    
+    <!------ TEMPLATE BEGINS ------->
+    <div class="cell" style="">
+      <div class="content_centering"> 
         
-        	<div id="logo" style="font-size:24pt; color:black; padding-right:50px;">
-            	A / R
-            </div>
-            
-            <div id="logo" style="font-size:10.5pt;">
-            	Spring / Week 7
-            </div>
-            
-            <div>
-            	<span>
-                	
-                </span>
-            </div>
-            
+        <!-- Ranking Number -->
+        <div class="rank_container">
+          <div class="rank_number">1</div>
         </div>
         
+        <!-- Art -->
+        <div class="picture" style=""> <img style="width:100px;" src="http://iv1.lisimg.com/image/708222/600full-bakemonogatari-poster.jpg" /> </div>
         
-        <!--Begin content-->    
-        
-        <div id="content" >
-        	
-            <!------ TEMPLATE BEGINS -------> 
-            <div class="cell" style="">
-            	<div class="content_centering">
-                
-                	<!-- Ranking Number --> 
-                	<div class="rank_container">
-                    	<div class="rank_number">1</div>
-                    </div>
-                
-                    <!-- Art --> 
-                    <div class="picture" style="">
-                        <img style="width:100px;" src="http://iv1.lisimg.com/image/708222/600full-bakemonogatari-poster.jpg" />                   </div>
-                        
-                    <!-- Data set
+        <!-- Data set
                     
                     Uses "calc()" for resolution responsiveness, not much support but best method so far without using JS
                     
-                    -->    
-                    <div class="data" style="">
-                        <div class="data-top" style="">                    
-                            <!-- Title --> 
-                            <div style="font-size:13pt;">
-                                Bakemonogatari
-                            </div>
-                        </div>
-                        
-                        <!-- Score Bar 
+                    -->
+        <div class="data" style="">
+          <div class="data-top" style=""> 
+            <!-- Title -->
+            <div style="font-size:13pt;"> Bakemonogatari </div>
+          </div>
+          
+          <!-- Score Bar 
                         
                         Currently: 100% width -> positive/negative -> split into two sections sections that's relative to positive/negative's 100%
                         
                         Pretty complicated, requires many calculation. Consider changing.
-                        --> 
-                        <div class="data-mid" >
-                            
-                            <div class="positives">
-                                <div class="bars" style="width:calc(60% - 0.25%); background:#66b968;"></div>
-                                <div class="bars" style="width:calc(20% - 0.25%); background:#cee9b2;"></div>
-                            </div>
-                            
-                            <div class="seperator" style="width:1%; display:inline-block;"></div>
-                            
-                            <div class="negatives" style="opacity:0.1;">
-                                <div class="bars" style="width:calc(15% - 0.25%); background:#ee5164;"></div>
-                                <div class="bars" style="width:calc(5% - 0.25%); background:#c70219;"></div>
-                            </div>
-                            
-                        </div>
-                        
-                        <!-- Misc Data--> 
-                        <div class="data-bottom" style="font-size:9pt;">
-                            <div>
-                                <span>Ranking:</span>
-                                <span style="color:#66b968;">+2</span>
-                            </div>
-                        </div>
-                    </div>
-                	
-                
-            	</div>
+                        -->
+          <div class="data-mid" >
+            <div class="positives">
+              <div class="bars" style="width:calc(60% - 0.25%); background:#66b968;"></div>
+              <div class="bars" style="width:calc(20% - 0.25%); background:#cee9b2;"></div>
             </div>
-            
-            <!-- END template--> 
-                   	
+            <div class="seperator" style="width:1%; display:inline-block;"></div>
+            <div class="negatives" style="opacity:0.1;">
+              <div class="bars" style="width:calc(15% - 0.25%); background:#ee5164;"></div>
+              <div class="bars" style="width:calc(5% - 0.25%); background:#c70219;"></div>
             </div>
-            
+          </div>
+          
+          <!-- Misc Data-->
+          <div class="data-bottom" style="font-size:9pt;">
+            <div> <span>Ranking:</span> <span style="color:#66b968;">+2</span> </div>
+          </div>
         </div>
-        
-    	
+      </div>
     </div>
-
+    
+    <!-- END template--> 
+    
+  </div>
+</div>
+</div>
 </body>
-<footer>
-
-	
-
-
-</footer>
+<footer></footer>
