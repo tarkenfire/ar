@@ -1,4 +1,7 @@
-<header>
+<!DOCTYPE html>
+
+<html>
+<head>
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
   <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/themes/smoothness/jquery-ui.css" />
   <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
@@ -139,11 +142,11 @@ function initiate_trailer(){
 
 	
 </script>
-  <style>
+  <style type="text/css">
 	
 	body {margin:0;}
 	
-	div {color:#6d6d6d; font-family: Segoe UI, Arial, Helvetica, sans-serif;"}
+	div {color:#6d6d6d; font-family: "Segoe UI, Arial, Helvetica, sans-serif;"}
 	
 	#header {padding:40px 0;}
 	#header div {display:inline;}
@@ -190,7 +193,7 @@ font-size: 9pt;
 	
 }
 
-.overlay_block{width:100%; padding:25px; margin-bottom:15px; background:white; position:relative;
+.overlay_block{width:100%; padding:25px; margin-bottom:15px; background:white;
 	-webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
           box-sizing: border-box;}
@@ -215,7 +218,7 @@ font-size: 9pt;
 #poster_overlay {position: absolute; width: 200px; height: 285px; background: black; opacity: 0; line-height: 285px; color: white; text-align: center; font-size: 25pt; cursor:pointer;}
 
     </style>
-</header>
+</head>
 
 <body>
 
@@ -224,7 +227,7 @@ font-size: 9pt;
   <div id="overlay_container"> 
     
     <!--- Information --->
-    <div id="infobox" class="overlay_block" style="position:inherit"> 
+    <div id="infobox" class="overlay_block" style="position:relative;"> 
       
       <!--- Trailer --->
       <div id="infobox_trailer">
@@ -242,39 +245,59 @@ font-size: 9pt;
       	<div id="poster_overlay" style="">
         	&#9654;
         </div>
+        <!--**INPUT** Poster Art--->
         <img style="width:200px;" src="http://cdn.myanimelist.net/images/anime/12/36775l.jpg"/>
       </div>
       
       <!--- Texts --->
       <div id="infobox_texts" style="display:inline-block; width:520px;">
+      
+      	<!--**INPUT** Title--->
         <div id="infobox_title" style="font-size:20pt;"> Shinsekai Yori </div>
+        
+        <!--**INPUT** Description--->
         <div id="infobox_description">
           <p>A millennium from now, in Japan, exists a utopia. The Protagonist, Saki Watanabe, lives in an idyllic village barred from the outside world. Her world is ruled by the people who possess the "gods' power" of psychokinesis. After finally obtaining her own powers, Saki enters the Zenjin Academy to train along with five other children: Satoru Asahina, Maria Akizuki, Mamoru Itou, Shun Aonuma, and Reiko Amano.</p>
           <p> Not all is as it seems, however. In this utopian village, strange rumors about a monstrous cat that abducts children circulate, and students are said to disappear from the academy. The world and its history are much darker than they appear and humanity is on the verge of collapse.</p>
         </div>
+        
         <div id="infobox_meta">
-          <div id="boxmeta_studio" class="boxmeta_level"> <span class="boxmeta_label">Studio:</span> <span class="boxmeta_content">A-1 Pictures</span> </div>
-          <div id="boxmeta_genre" class="boxmeta_level"> <span class="boxmeta_label">Genre:</span> <span class="boxmeta_content">Sci-Fi, Fiction</span> </div>
-          <div id="boxmeta_people" class="boxmeta_level"> <span class="boxmeta_label">Key People:</span> <span class="boxmeta_content">Ishihama Masashi </span> </div>
+        <!--**INPUT** Studio--->
+          <div id="boxmeta_studio" class="boxmeta_level">
+          	<span class="boxmeta_label">Studio:</span> <span class="boxmeta_content">A-1 Pictures</span>
+          </div>
+          
+        <!--**INPUT** Genre--->
+          <div id="boxmeta_genre" class="boxmeta_level">
+          	<span class="boxmeta_label">Genre:</span> <span class="boxmeta_content">Sci-Fi, Fiction</span>
+          </div>
+          
+        <!--**INPUT** Key People--->
+          <div id="boxmeta_people" class="boxmeta_level">
+          	<span class="boxmeta_label">Key People:</span> <span class="boxmeta_content">Ishihama Masashi </span>
+          </div>
         </div>
       </div>
     </div>
     
     <!--- Consumable --->
-    <div id="consume_stream" class="overlay_half_block" style="margin-right:3px;"> Stream </div>
-    <div id="consume_download" class="overlay_half_block"> Download </div>
+    
+        <!--**INPUT** Streaming Link--->
+        <div id="consume_stream" class="overlay_half_block" style="margin-right:3px;"> Stream </div>
+        <!--**INPUT** Download Links--->
+        <div id="consume_download" class="overlay_half_block"> Download </div>
     
     
     
     
         
-    <!-- Begin Scores --> 
+    <!-- Begin Score Breakdowns --> 
     
-    <style>
-	.score_section {padding:10px 0; margin-bottom:20px; padding-left:10px;}
-	.score_section img {margin:10px; width:50px; border:1px #d6d6d6 solid}
+    <style type="text/css">
+	.scorebreakdown_section {padding:10px 0; margin-bottom:20px; padding-left:10px;}
+	.scorebreakdown_section img {margin:10px; width:50px; border:1px #d6d6d6 solid}
 	
-	.overlay_user_avatar{display:inline-block; position:relative; cursor:pointer;}
+	.overlay_user_avatar{display:inline-block; cursor:pointer;}
 	
 	.borders {display:inline-block; padding:10px;}
 	#lvl4 {border-left:5px #66b968 solid;}
@@ -285,7 +308,7 @@ font-size: 9pt;
 	</style>
     
     <div class="overlay_block" style="font-size:0;">
-    	<div class="score_section">
+    	<div class="scorebreakdown_section">
         	<div class="borders" id="lvl4" style="">
             
                 <div class="overlay_user_avatar">
@@ -311,7 +334,7 @@ font-size: 9pt;
             </div>
         </div>
         
-        <div class="score_section">
+        <div class="scorebreakdown_section">
         	<div class="borders" id="lvl3" style="">
                 <div class="overlay_user_avatar">
                     <img src="https://pbs.twimg.com/profile_images/1602718531/profile_3_bigger.jpg">
@@ -351,7 +374,7 @@ font-size: 9pt;
             </div>
         </div>
         
-        <div class="score_section">
+        <div class="scorebreakdown_section">
         	<div class="borders" id="lvl2" style="">
                 <div class="overlay_user_avatar">
                     <img src="https://pbs.twimg.com/profile_images/288200615/AnyaFly_bigger.png">
@@ -366,7 +389,7 @@ font-size: 9pt;
                 </div>
         </div>
         
-        <div class="score_section">
+        <div class="scorebreakdown_section">
         	<div class="borders" id="lvl1" style="">
                 <div class="overlay_user_avatar">
                     <img src="https://pbs.twimg.com/profile_images/423388161612324864/WkGlkx6V_bigger.png">
@@ -376,7 +399,7 @@ font-size: 9pt;
         </div>
     </div>
     
-    <!-- END Scores --> 
+    <!-- END Score Breakdown--> 
         
     
     
@@ -402,12 +425,14 @@ font-size: 9pt;
     <div class="cell" style="">
       <div class="content_centering"> 
         
-        <!-- Ranking Number -->
+        
+        <!--**INPUT** Ranking Number--->
         <div class="rank_container">
           <div class="rank_number">1</div>
         </div>
         
-        <!-- Art -->
+        
+        <!--**INPUT** Art --->
         <div class="picture" style=""> <img style="width:100px;" src="http://iv1.lisimg.com/image/708222/600full-bakemonogatari-poster.jpg" /> </div>
         
         <!-- Data set
@@ -417,7 +442,7 @@ font-size: 9pt;
                     -->
         <div class="data" style="">
           <div class="data-top" style=""> 
-            <!-- Title -->
+            <!--**INPUT** Streaming Link--->
             <div style="font-size:13pt;"> Bakemonogatari </div>
           </div>
           
@@ -427,6 +452,9 @@ font-size: 9pt;
                         
                         Pretty complicated, requires many calculation. Consider changing.
                         -->
+                        
+                        
+        <!--**INPUT** Score Data--->
           <div class="data-mid" >
             <div class="positives">
               <div class="bars" style="width:calc(60% - 0.25%); background:#66b968;"></div>
@@ -441,6 +469,8 @@ font-size: 9pt;
           
           <!-- Misc Data-->
           <div class="data-bottom" style="font-size:9pt;">
+          
+        	<!--**INPUT** Ranking Change --->
             <div> <span>Ranking:</span> <span style="color:#66b968;">+2</span> </div>
           </div>
         </div>
@@ -452,5 +482,6 @@ font-size: 9pt;
   </div>
 </div>
 </div>
+
 </body>
 <footer></footer>
