@@ -42,12 +42,12 @@
 <!-- Hover and opening overlay -->
 	$('body').on({
 		mouseenter: function(){
-			$(this).stop().css('background-color','rgb(243, 243, 243)');
-			$(this).find('.rank_number').animate({'opacity':'1'},400);
+			$(this).parent().stop().css('background-color','rgb(243, 243, 243)');
+			$(this).parent().find('.rank_number').animate({'opacity':'1'},400);
 			},
 		mouseleave: function(){
-			$(this).stop().css('background-color','white');
-			$(this).find('.rank_number').stop().css('opacity','0');
+			$(this).parent().stop().css('background-color','white');
+			$(this).parent().find('.rank_number').stop().css('opacity','0');
 			},
 		click: function(){
 			$('body').css({'overflow-y':'hidden','padding-right':'15px'})
@@ -55,7 +55,7 @@
 				$('body').css({'padding-right':'15px'})
 			});
 			}
-		},'.cell')
+		},'.content_centering')
 			
 
 <!-- Closing Overlay-->
@@ -445,22 +445,18 @@ font-size: 9pt;
           
           <!-- Score Bar 
                         
-                        Currently: 100% width -> positive/negative -> split into two sections sections that's relative to positive/negative's 100%
-                        
-                        Pretty complicated, requires many calculation. Consider changing.
                         -->
                         
                         
         <!--**INPUT** Score Data--->
           <div class="data-mid" >
             <div class="positives">
-              <div class="bars" style="width:calc(60% - 0.25%); background:#66b968;"></div>
-              <div class="bars" style="width:calc(20% - 0.25%); background:#cee9b2;"></div>
+              <div class="bars" style="width:60%; background:#66b968;"></div>
+              <div class="bars" style="width:20%; background:#cee9b2;"></div>
             </div>
-            <div class="seperator" style="width:1%; display:inline-block;"></div>
-            <div class="negatives" style="opacity:0.1;">
-              <div class="bars" style="width:calc(15% - 0.25%); background:#ee5164;"></div>
-              <div class="bars" style="width:calc(5% - 0.25%); background:#c70219;"></div>
+            <div class="negatives" style="opacity:0.08;">
+              <div class="bars" style="width:15%; background:#ee5164;"></div>
+              <div class="bars" style="width:5%; background:#c70219;"></div>
             </div>
           </div>
           
