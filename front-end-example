@@ -143,7 +143,7 @@ function initiate_trailer(){
 	
 	body {margin:0;}
 	
-	div {color:#6d6d6d; font-family: Segoe UI, Arial, Helvetica, sans-serif;"}
+	div {color:#6d6d6d; font-family: "Segoe UI, Arial, Helvetica, sans-serif;"}
 	
 	#header {padding:40px 0;}
 	#header div {display:inline;}
