@@ -50,8 +50,10 @@
 			$(this).find('.rank_number').stop().css('opacity','0');
 			},
 		click: function(){
-			$('body').css('overflow-y','hidden')
-			$('#overlay').fadeIn();
+			$('body').css({'overflow-y':'hidden','padding-right':'15px'})
+			$('#overlay').fadeIn(400,'',function(){
+				$('body').css({'padding-right':'15px'})
+			});
 			}
 		},'.cell')
 			
@@ -60,8 +62,9 @@
 	$('body').on({
 			click: function(e){
 				if($("#overlay_container").has(e.target).length === 0){			
-					$('#overlay').fadeOut(400);
-					$('body').css('overflow-y','')
+					$('#overlay').fadeOut(400,'',function(){
+						$('body').css({'overflow-y':'','padding-right':''});
+					});
 					$('#infobox_trailer').fadeOut();
 					player.stopVideo();	
 				}
@@ -102,6 +105,32 @@
 				$('#trailer_close_button').css('color','')
 			}
 		}, '#trailer_close_background')
+
+
+
+<!-- Consuming hovering -->
+
+	$('body').on({
+			mouseenter: function(){		
+				$(this).css({'background-color':'#c72109','color':'white'})
+			},
+			mouseleave: function(){		
+				$(this).css({'background-color':'','color':''})
+			}
+		}, '.overlay_half_block')
+
+
+<!-- Overlay Avatar hovering -->
+
+	$('body').on({
+			mouseenter: function(){		
+				$(this).css({'opacity':'.5'})
+			},
+			mouseleave: function(){		
+				$(this).css({'opacity':'1'})
+			}
+		}, '.overlay_user_avatar')
+
 
 
 function initiate_trailer(){
@@ -231,9 +260,128 @@ font-size: 9pt;
       </div>
     </div>
     
-    <!--- Download --->
+    
+    <!--- Consumable --->
     <div id="consume_stream" class="overlay_half_block" style="margin-right:3px;"> Stream </div>
     <div id="consume_download" class="overlay_half_block"> Download </div>
+    
+    
+    
+    
+        
+    <!-- Begin Scores --> 
+    
+    <style>
+	.score_section {padding:10px 0; margin-bottom:20px; padding-left:10px;}
+	.score_section img {margin:10px; width:50px; border:1px #d6d6d6 solid}
+	
+	.overlay_user_avatar{display:inline-block; position:relative; cursor:pointer;}
+	
+	.borders {display:inline-block; padding:10px;}
+	#lvl4 {border-left:5px #66b968 solid;}
+	#lvl3 {border-left:5px #cee9b2 solid;}
+	#lvl2 {border-left:5px #ee5164 solid;}
+	#lvl1 {border-left:5px #c70219 solid;}
+		
+	</style>
+    
+    <div class="overlay_block" style="font-size:0;">
+    	<div class="score_section">
+        	<div class="borders" id="lvl4" style="">
+            
+                <div class="overlay_user_avatar">
+                    <img src="https://pbs.twimg.com/profile_images/421791630178283520/T41ywubG_bigger.jpeg">
+                    <div class="overlay_username">--namename</div>
+                </div>
+                
+                <div class="overlay_user_avatar">
+                    <img src="https://pbs.twimg.com/profile_images/2780100646/d3dbab6a42ac755100f70b45058deeac_bigger.jpeg">
+                    <div class="overlay_username">-namename</div>
+                </div>
+                
+                <div class="overlay_user_avatar">
+                    <img src="https://pbs.twimg.com/profile_images/423370366820446208/vTlHpJ_s_bigger.png">
+                    <div class="overlay_username">-namename</div>
+                </div>
+                
+                <div class="overlay_user_avatar">
+                    <img src="https://pbs.twimg.com/profile_images/3461646049/3a08c1c6edc8163fc3a5b61652f23824_bigger.jpeg">
+                    <div class="overlay_username">-namename</div>
+                </div>
+                
+            </div>
+        </div>
+        
+        <div class="score_section">
+        	<div class="borders" id="lvl3" style="">
+                <div class="overlay_user_avatar">
+                    <img src="https://pbs.twimg.com/profile_images/1602718531/profile_3_bigger.jpg">
+                    <div class="overlay_username">-namename</div>
+                </div>
+                
+                <div class="overlay_user_avatar">
+                    <img src="https://pbs.twimg.com/profile_images/378800000833699875/a9f5f82ce234a2c200d74ed3834c7d0d_bigger.png">
+                    <div class="overlay_username">-namename</div>
+                </div>
+                
+                <div class="overlay_user_avatar">
+                    <img src="https://pbs.twimg.com/profile_images/437472345893007361/xyNFeTfk_bigger.png">
+                    <div class="overlay_username">-namename</div>
+                </div>
+                
+                <div class="overlay_user_avatar">
+                    <img src="https://pbs.twimg.com/profile_images/436495478981533697/zzbsVbT-_bigger.jpeg">
+                    <div class="overlay_username">-namename</div>
+                </div>
+                
+                <div class="overlay_user_avatar">
+                    <img src="https://pbs.twimg.com/profile_images/378800000317022736/f51165f1263703e64bf33a65f252efff_bigger.png">
+                    <div class="overlay_username">-namename</div>
+                </div>
+                
+                <div class="overlay_user_avatar">
+                    <img src="https://pbs.twimg.com/profile_images/3022517249/4830f8be090bb5737e3d4e87a4dd15e4_bigger.jpeg">
+                    <div class="overlay_username">-namename</div>
+                </div>
+                
+                <div class="overlay_user_avatar">
+                    <img src="https://pbs.twimg.com/profile_images/861904284/______bigger.jpg">
+                    <div class="overlay_username">-namename</div>
+                </div>
+            
+            </div>
+        </div>
+        
+        <div class="score_section">
+        	<div class="borders" id="lvl2" style="">
+                <div class="overlay_user_avatar">
+                    <img src="https://pbs.twimg.com/profile_images/288200615/AnyaFly_bigger.png">
+                    <div class="overlay_username">-namename</div>
+                </div>
+                
+                <div class="overlay_user_avatar">
+                    <img src="https://pbs.twimg.com/profile_images/436020346324406272/93IxJJZ1_bigger.png">
+                    <div class="overlay_username">-namename</div>
+                </div>
+                
+                </div>
+        </div>
+        
+        <div class="score_section">
+        	<div class="borders" id="lvl1" style="">
+                <div class="overlay_user_avatar">
+                    <img src="https://pbs.twimg.com/profile_images/423388161612324864/WkGlkx6V_bigger.png">
+                    <div class="overlay_username">-namename</div>
+                </div>
+        	</div>
+        </div>
+    </div>
+    
+    <!-- END Scores --> 
+        
+    
+    
+    
   </div>
 </div>
 
