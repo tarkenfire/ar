@@ -11,8 +11,8 @@
 	session_start();
 	
 	//TODO: Add key secret.
-	$oauthsession = new TwitterOAuth("", "");
-	$request_token = $twitteroauth->getRequestToken(""); //TODO: URL.
+	$oauthsession = new TwitterOAuth("yTVZYx9fp9pMfLK6sle5w", "wWjKMz7DUUy3scH3BJChlpdza0zQuJhLMWvKscKro");
+	$request_token = $oauthsession->getRequestToken("http://www.tarkenfire.com/personal/AR/ar/complete_login.php"); //TODO: URL.
 	
 	//save token and secret to session
 	$_SESSION['oauth_token'] = $request_token['oauth_token'];
@@ -21,6 +21,7 @@
 	//handle response
 	if($oauthsession->http_code == 200){
 		$url = $oauthsession->getAuthorizeURL($request_token['oauth_token']);
+		header('Location: '. $url);
 	}
 	else {
 		//TODO: This is not an elegant way to handle the error.
