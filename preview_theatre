@@ -1,0 +1,418 @@
+<html>
+<head>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/themes/smoothness/jquery-ui.css" />
+<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+<script>
+		
+                          // 2. This code loads the IFrame Player API code asynchronously.
+                          var tag = document.createElement('script');
+                    
+                          tag.src = "https://www.youtube.com/iframe_api";
+                          var firstScriptTag = document.getElementsByTagName('script')[0];
+                          firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+                    
+                          // 3. This function creates an <iframe> (and YouTube player)
+                          //    after the API code downloads.
+                          var player;
+                          function onYouTubeIframeAPIReady() {
+                            player = new YT.Player('youtube_player_target', {
+							  height: '720',
+							  width: '1280',
+                              videoId: 'vDlVNli9bAg',
+							  playerVars: {
+								  'disablekb':1,
+								  'autohide': 1,
+								  'modestbranding':1,
+								  'rel':0,
+								  'cc_load_policy':1,
+								  'controls':0,
+								  },
+                              events: {
+                                'onReady': onPlayerReady,
+                                'onStateChange': onPlayerStateChange
+								}
+                            });
+                          }
+                    
+                          // 4. The API will call this function when the video player is ready.
+                          function onPlayerReady(event) {
+							  //player.pauseVideo()
+							  
+							  player.setPlaybackQuality('hd720');
+                          }
+
+						  // 5. The API calls this function when the player's state changes.
+						  //    The function indicates that when playing a video (state=1),
+						  //    the player should play for six seconds and then stop.
+						  function onPlayerStateChange(event) {
+							if (event.data == YT.PlayerState.ENDED) {
+								advance_video();
+								
+							}
+							else if (event.data == YT.PlayerState.CUED){
+								$("#theatre_positioner").fadeIn();
+							}
+						  }
+	</script>
+    
+    
+    <script>
+	video=new Object();
+	
+	video[0]=new Object();
+	video[0].title="Shinsekai Yori";
+	video[0].description="<p>A millennium from now, in Japan, exists a utopia. The Protagonist, Saki Watanabe, lives in an idyllic village barred from the outside world. Her world is ruled by the people who possess the 'gods' power' of psychokinesis. After finally obtaining her own powers, Saki enters the Zenjin Academy to train along with five other children: Satoru Asahina, Maria Akizuki, Mamoru Itou, Shun Aonuma, and Reiko Amano.</p><p> Not all is as it seems, however. In this utopian village, strange rumors about a monstrous cat that abducts children circulate, and students are said to disappear from the academy. The world and its history are much darker than they appear and humanity is on the verge of collapse.</p>";
+	video[0].consensus="Recommended";
+	video[0].studio='A-1 Pictures';
+	video[0].genre="Sci-Fi, Fiction";
+	video[0].people="Ishihama Masashi";
+	video[0].videoid='vDlVNli9bAg';
+	
+	video[1]=new Object();
+	video[1].title="Akuma no Riddle";
+	video[1].description="<p>The story is set at Myoujou Academy, a private girls' boarding school. The 10th year's Kurogumi class has 12 assassins with their sights on one target, Haru Ichinose. Tokaku Azuma is a recent transfer student who is also targeting Ichinose, but she gradually develops feelings for Ichinose.";
+	video[1].consensus="Recommended";
+	video[1].studio='Diomedea';
+	video[1].genre="Romance";
+	video[1].people="Naomi Ide";
+	video[1].videoid='IrSvb2Fc3d8';
+	
+	
+	video[2]=new Object();
+	video[2].title="Atelier Escha & Logy";
+	video[2].description='<p>Game company Gust announced an anime adaptation of its Atelier Escha & Logy: Alchemists of the Dusk Sky (Atelier Escha & Logy ~Tasogare no Sora no Renkinjutsushi~) game during its 20th anniversary presentation on Wednesday. The anime will debut next year from Studio Gokumi (Saki Zenkoku-hen, Kin-iro Mosaic). This will be the first television anime adaptation from the Atelier franchise. </p><p>This world has gone through many Dusks, and is slowly nearing its end. Within this world, in the western reaches of the "Land of Dusk," there was a nation that prospered thanks to its use of alchemy. There, in order to survive the eventual arrival of the "Dusk End," the people devoted their efforts to rediscover and recreate lost alchemic technologies. Rediscovered technology from the past era was gathered in the alchemy research city known as "Central," where research was conducted on how to halt the advance of the twilight. One of the heroes is a young man who researched alchemy in Central, the other a girl living in a small town on the frontier. This girl"s name is Escha. In the process of using her knowledge of ancient alchemy to help others, she was assigned to the Development Department. The young man"s name is Logy. Having learned the newest alchemic techniques in Central, he requested a transfer to this understaffed town to make use of his abilities, and meets Escha when he is assigned to the Development Department as well. The two make a promise to use their alchemy together, and bring success to the Development Department. </p>';
+	video[2].consensus="Highly Recommended";
+	video[2].studio='Studio Gokumi';
+	video[2].genre="Fantasy";
+	video[2].people="";
+	video[2].videoid='ogecCUZNctE';
+	
+	video[3]=new Object();
+	video[3].title="Black Bullet";
+	video[3].description='<p>A near future, where humans have been defeated by the viral parasites named Gastrea. They have been exiled into a small territory and live in despair, side-by-side in terror. In this world trapped in darkness— Rentaro, a boy living near Tokyo and member of the "Civil Security"—an organization specializing in fighting against the Gastrea—is used to accomplishing dangerous tasks. His partner is Enju, a precocious young girl. They fight thanks to their peculiar powers until one day, when they receive a special assignment from the government. This top secret mission is to prevent the destruction of Tokyo... Set in a near future, this thrilling heroic-action story... starts now! </p>';
+	video[3].consensus="Highly Recommended";
+	video[3].studio='Kinema Citrus';
+	video[3].genre="Fantasy";
+	video[3].people="";
+	video[3].videoid='nHgcn2YevWA';
+	
+	
+	video[4]=new Object();
+	video[4].title="Gokukoku no Brynhildr";
+	video[4].description='<p>The original manga revolves around high school boy Ryōta Murakami, who cannot forget his female childhood friend whom he let die in an accident. Feeling that he must fulfill their promise of proving the existence of aliens, he has continuously looked up at the sky as a member of the astronomy club. One day, a girl named Neko Kuroha who looks exactly like his childhood friend appears as a transfer student. It turns out that she is a magic-user that has run away from a research lab.</p>';
+	video[4].consensus="Highly Recommended";
+	video[4].studio='Arms';
+	video[4].genre="Seinen, Drama";
+	video[4].people="";
+	video[4].videoid='9DhyjR_hbMs';
+	
+	
+	video[5]=new Object();
+	video[5].title="Isshuukan Friends.";
+	video[5].description='<p>The story of the manga revolves around Yuki, a boy who wants to become friends with his classmate and desk neighbor Kaori. However, she gently declines his friendship, saying, “But, my... Memories of my friends disappear in a week...” Even so, Yūki wants to become her friend, and so the two become friends over and over again as the weeks pass.</p>';
+	video[5].consensus="Highly Recommended";
+	video[5].studio='Brains Base';
+	video[5].genre="School";
+	video[5].people="";
+	video[5].videoid='TZvQtV2ijHM';
+	
+		
+	video[6]=new Object();
+	video[6].title="idonia no Kishi";
+	video[6].description="<p>It's been a thousand years since the Gauna, a strange alien race with no known method of communication, destroyed the solar system. A portion of humanity managed to escape using enormous 'seed ships' like the Sidonia, which have allowed them to maintain the population while drifting through space. Nagate Tanikaze is a young man who has been raised deep in the bowels of the ship. When he goes into training to pilot the huge robotic weapons known as Gardes, Nagate is entrusted with piloting the legendary unit known as Tsugumori. Nagate and his fellow pilots put their lives on the line against the Gauna, in the ultimate battle for the survival of humanity!</p>";
+	video[6].consensus="Highly Recommended";
+	video[6].studio='POLYGON PICTURES';
+	video[6].genre="Action, Fantasy, Seinen";
+	video[6].people="";
+	video[6].videoid='I31QP4SE3Gw';
+	
+	video[7]=new Object();
+	video[7].title="Ryuugajou Nanana no Maizoukin";
+	video[7].description="<p>The story centers around the treasure of Nanana, a ghost who was once a beautiful but NEET (Not in Education, Employment or Training) girl. A boy named Juugo was disowned by his father and forced to transfer to a high school on the 'Special Student Zone,' an artificial island. With only 40,000 yen (about US$500) a month to live on, Juugo chooses a low-rent apartment that happens to be haunted by Nanana. Juugo and members of the school's adventure club join a 'treasure hunt royale' on the island for the Nanana Collection, a treasure that possesses a mysterious power.</p>";
+	video[7].consensus="Highly Recommended";
+	video[7].studio='A-1 Pictures';
+	video[7].genre="Comedy, School, Supernatural";
+	video[7].people="";
+	video[7].videoid='ROjHHkme5GI';
+	
+	video[8]=new Object();
+	video[8].title="Mahouka Koukou no Rettousei";
+	video[8].description="<p>Magic is a product of neither legends nor fairy tales, but instead has become a technology of reality since a time unknown to people. Supernatural power became a technology systematized through magic, while magic became a technical skill. A 'Supernatural Power User' became a 'Magic Technician.' Magic Technicians (in short, Magicians) are nurtured through Magic High Schools and Universities. This is a story about: Tatsuya, a defective elder brother low achiever. Miyuki, a perfect, flawless younger sister high achiever. After both siblings entered a Magic High School, The stage of daily turbulence was unveiled—. </p>";
+	video[8].consensus="Highly Recommended";
+	video[8].studio='Madhouse Studio';
+	video[8].genre="Romance, School, Sci-Fi";
+	video[8].people="";
+	video[8].videoid='1glvtP_G07U';
+	
+	
+	video[9]=new Object();
+	video[9].title="Hitsugi no Chaika";
+	video[9].description="<p>Toru Acura, an incredibly lazy man with some hidden talents, has been forced by his sister Akari to actually go outside and search for work. However, he is in for a big surprise when he meets Chaika Trabant in the forest, and they are suddenly attacked by a monster! How will they survive? Who is this mysterious girl, and why is she being targeted?</p>";
+	video[9].consensus="Highly Recommended";
+	video[9].studio='Bones';
+	video[9].genre="Action, Adventure, Comedy, Fantasy";
+	video[9].people="";
+	video[9].videoid='Xvjqf7c6g-s';
+	
+	
+	video[10]=new Object();
+	video[10].title="Captain Earth";
+	video[10].description='<p>One night right before summer vacation, Daiji Manatsu, a second-year in high school, sees a weird round rainbow floating in the sky above Seed Island (Shuushi/Tane Island) and ventures there alone. He has seen this rainbow before. With the memories of his fathers mysterious death and an encounter of a mysterious boy and girl, Daiji arrives on the island while the alarm of a building labeled "Earth Engine" is going off. Someone asks him "Are you a captain?" just as robotic intruders from Uranus called "Kiltgang" arrive. The battle around the shining stars is about to begin.</p>';
+	video[10].consensus="Highly Recommended";
+	video[10].studio='Bones';
+	video[10].genre="Sci-Fi, Mecha";
+	video[10].people="";
+	video[10].videoid='i6Az5YmnyPY';
+	
+	
+	video[11]=new Object();
+	video[11].title="No Game No Life";
+	video[11].description='<p>The story of No Game, No Life centers around Sora and Shiro, a brother and sister whose reputations as brilliant NEET (Not in Education, Employment, or Training) hikikomori (shut-in) gamers have spawned urban legends all over the Internet. These two gamers even consider the real world as just another "crappy game." One day, they are summoned by a boy named "God" to an alternate world. There, God has prohibited war and declared this to be a world where "everything is decided by games" - even national borders. Humanity has been driven back into one remaining city by the other races. Will Sora and Shiro, the good-for-nothing brother and sister, become the "Saviors of Humanity" on this alternate world? "Well, lets start playing."</p>';
+	video[11].consensus="Highly Recommended";
+	video[11].studio='Madhouse Studio';
+	video[11].genre="Adventure, Comedy, Ecchi";
+	video[11].people="";
+	video[11].videoid='TqMCYf1FibU';
+	
+	
+	video[12]=new Object();
+	video[12].title="Mushishi Zoku Shou";
+	video[12].description='<p>The second season of Mushishi."</p>';
+	video[12].consensus="Highly Recommended";
+	video[12].studio='Artland';
+	video[12].genre="Adventure, Mystery, Fantasy";
+	video[12].people="";
+	video[12].videoid='W05ydugX1RE';
+	
+	
+	video[13]=new Object();
+	video[13].title="Mekaku City Actors";
+	video[13].description='<p>Shintaro Kisaragi--a HikiNEET who shut himself inside his room for 2 years and has been living his life normally until he met a cyber girl named Ene, who appeared in his computer screen when someone anonymously sent him a mysterious e-mail one year ago. One day, Ene had been messing up with Shintaros PC. which cause him have to go to outside world for first time in 2 years. </p><p>A story based on the new popular series of songs by Jin (Shizennoteki-p) titled "Kagerou Project".</p>';
+	video[13].consensus="Highly Recommended";
+	video[13].studio='Shaft';
+	video[13].genre="Comedy, Romance, Sci-Fi";
+	video[13].people="";
+	video[13].videoid='4M3ZrwvAzDw';
+	
+	
+	video_index = 0;
+	
+	function change_video(){
+		
+		$('#theatre_positioner').fadeOut(400,'',function(){
+		
+			$('#theatre_title').html(replacement.title);
+			$('#theatre_description').html(replacement.description);
+			$('#theatre_consensus').html(replacement.consensus);
+			$('#theatre_studio').html(replacement.studio);		
+			$('#theatre_genre').html(replacement.genre);
+			$('#theatre_people').html(replacement.people);
+			player.cueVideoById(replacement.videoid)
+			
+			open_theatre_overlay();
+		});
+		}
+	
+	function advance_video(){
+		if(video_index != 13){
+			video_index++;
+			replacement = video[video_index];
+			
+			check_list()
+			change_video();	
+		}
+		else {
+			$('#target2').html(list.join('<br>'));
+			$('#target3').show();
+			$('#temp').fadeIn();			
+			}
+		}
+	
+	function rewind_video(){
+		if(video_index != 0){
+			video_index--;
+		}
+		replacement = video[video_index];
+		
+		check_list()
+		change_video();	
+	}
+	
+	function check_list(){
+		if (list.indexOf(replacement.title) != -1){
+			$('#mark_interesting').animate({'color':'#c70219'},200).prop('toggled',1);
+		}
+		else {
+			$('#mark_interesting').animate({'color':'color: rgba(109, 109, 109,1)'},200).prop('toggled','');}
+	}
+	</script>
+    
+    
+    <script>
+	$(document).ready(function(){
+		$('body').on({
+			click: function(){
+					close_theatre_overlay();
+				}
+		}, '#theatre')
+	});
+	
+	$(document).keydown(function(e) {
+    switch(e.which) {
+        case 37: // left	
+			rewind_video();	
+        break;
+		
+		case 38: // Key up.
+			mark_interesting();
+        break;
+		
+        case 39: // right
+			advance_video();	
+        break;
+		
+		case 40: //down
+			toggle_overlay();		
+		break;
+
+        case 32: // space
+			toggle_overlay();
+        break;
+		
+		case 88: //x
+			$('#temp').fadeOut();
+		break;
+		
+        default: return; // exit this handler for other keys
+    }
+    e.preventDefault(); // prevent the default action (scroll / move caret)
+});
+	
+	list = new Array();
+	
+	function mark_interesting(){
+			if ($('#mark_interesting').prop('toggled') != 1){
+				$('#mark_interesting').animate({'color':'#c70219'},200).prop('toggled',1);;
+				
+				list.push($('#theatre_title').html());
+				
+			}
+			else {
+				$('#mark_interesting').animate({'color':'color: rgba(109, 109, 109,1)'},200).prop('toggled','');
+				var index = list.indexOf($('#theatre_title').html());
+				list.splice(index, 1);
+				}
+		}
+		
+	function toggle_overlay(){
+			
+			if(player.getPlayerState() == 2 || player.getPlayerState() == -1 || player.getPlayerState() == 5){
+				close_theatre_overlay();
+			}
+			else{
+				open_theatre_overlay();
+			}
+		}	
+	
+	function open_theatre_overlay(){
+			player.pauseVideo()
+			$('#theatre_detail_overlay').stop().fadeIn(400);
+		}
+		
+	function close_theatre_overlay(){
+			$('#theatre_detail_overlay').stop().fadeOut(400,'',player.playVideo());
+		}
+	
+	</script>
+<style>
+body {
+	margin: 0px;
+}
+
+div {
+	color: #6d6d6d;
+	font-family: Segoe UI, Arial, Helvetica, sans-serif;
+}
+
+#theatre {
+	width: 100%;
+	height:100%;
+	background: black;
+}
+
+#theatre_positioner {
+	margin: auto;
+	width: 1280px;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	height: 720px;
+	position: absolute;
+}
+
+.theatre_controls { padding: 0 25px; font-size:10pt; opacity:0.5;}
+
+
+.theatre_halfboxes{position:relative; display:inline-block; height:150px; box-sizing:content-box; font-size:10pt; text-align:center; vertical-align:top; line-height:150px; padding-left:175px; opacity:0.5;}
+
+#theatre_meta {margin-top:20px; font-size:8pt;}
+.theatre_boxmeta_level {margin-bottom:10px;}
+.theatre_boxmeta_label {font-weight:800; padding-right:5px;}
+
+.nav_arrows {font-size: 20pt; position: absolute; top: 50%; margin-top: -20px; padding:0 25px;}
+
+</style>
+</head>
+<body>
+
+<div id='temp' style="position:fixed; padding:20px; background:black; color:white;">
+	<div id='target3' style="text-decoration:underline; padding-bottom:10px; display:none;">Your List</div>
+	<div id='target2'>
+	INCOMPLETE, CONCEPT ONLY: How to use: [left][right] to switch between shows. [down] to open/close the descriptions. [up] to mark a show as interesting (saves it to list at end). 
+    </div>
+    <div style="color:#c70219; padding-top:20px; opacity:0.5;">
+    	press/type X to close this message.
+    </div>
+</div>
+
+<div id="theatre">
+
+	<div id="nav_menu" style="color: white; position: relative; height: 100%; display:none;">             
+        <div class="nav_arrows" style="left:0;"> < </div>             
+        <div class="nav_arrows" style="right:0;"> > </div>
+    </div>
+
+	<div style="position:fixed; bottom:25px; width:100%; text-align:center;">             
+        <span class="theatre_controls" id="theatre_overlay_closelabel">Toggle Information [Down]</span>
+        <span class="theatre_controls">How to use / Settings</span>
+        <span class="theatre_controls" id="mark_interesting">Mark as Interesting [Up]</span>
+    </div>
+
+  <div id="theatre_positioner">
+    <div id="theatre_screen" style="padding-bottom:20; width:1280px; height:720px; position:relative;">
+	   	<div id="theatre_detail_overlay" style="position:absolute; width:100%; height:100%; background:rgba(0, 0, 0, .9);">
+        	<div style="padding-top:50px; padding-left:50px; width:500px;">
+            
+            	<div id="theatre_title" style="font-size:18pt">Shinsekai Yori</div>
+                
+                <div id="theatre_description">
+                <p>A millennium from now, in Japan, exists a utopia. The Protagonist, Saki Watanabe, lives in an idyllic village barred from the outside world. Her world is ruled by the people who possess the "gods' power" of psychokinesis. After finally obtaining her own powers, Saki enters the Zenjin Academy to train along with five other children: Satoru Asahina, Maria Akizuki, Mamoru Itou, Shun Aonuma, and Reiko Amano.</p>
+          		<p> Not all is as it seems, however. In this utopian village, strange rumors about a monstrous cat that abducts children circulate, and students are said to disappear from the academy. The world and its history are much darker than they appear and humanity is on the verge of collapse.</p>
+                </div>
+                
+                <div id="theatre_meta">
+                  <div class="theatre_boxmeta_level" style="display:none;"> <span class="theatre_boxmeta_label">Consensus:</span> <span id="theatre_concensus" class="theatre_boxmeta_content" style="color:#66b968;">Highly Recommended</span> </div>
+                  <div class="theatre_boxmeta_level"> <span class="theatre_boxmeta_label">Studio:</span> <span id="theatre_studio" class="theatre_boxmeta_content">A-1 Pictures</span> </div>
+                  <div class="theatre_boxmeta_level"> <span class="theatre_boxmeta_label">Genre:</span> <span id="theatre_genre" class="theatre_boxmeta_content">Sci-Fi, Fiction</span> </div>
+                  <div class="theatre_boxmeta_level"> <span class="theatre_boxmeta_label">Key People:</span> <span id="theatre_people" class="theatre_boxmeta_content">Ishihama Masashi </span> </div>
+                </div>  
+            </div>
+        </div>
+    	<div id="youtube_player_target"></div>
+    </div>
+  </div>
+</div>
+</body>
+</html>
