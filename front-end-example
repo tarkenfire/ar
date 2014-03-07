@@ -49,10 +49,13 @@
 			$(this).parent().find('.rank_number').stop().css('opacity','0');
 			},
 		click: function(){
-			$('body').css({'overflow-y':'hidden','padding-right':'15px'})
-			$('#overlay').fadeIn(400,'',function(){
-				$('body').css({'padding-right':'15px'})
-			});
+				//Account for scrollbar movement
+				if (document.body.scrollHeight > document.body.clientHeight){
+					$('body').css({'padding-right':'15px'});
+					$('#menu_box').css({'right': 45});
+				}
+				$('body').css({'overflow-y':'hidden'});
+				$('#overlay').fadeIn(400);
 			}
 		},'.content_centering')
 
@@ -61,7 +64,16 @@
 			click: function(e){
 				if($("#overlay_container").has(e.target).length === 0){			
 					$('#overlay').fadeOut(400,'',function(){
-						$('body').css({'overflow-y':'','padding-right':''});
+						//Account for scrollbar movement
+						
+						if (document.body.scrollHeight > document.body.clientHeight){
+							$('body').css({'padding-right':''});
+							$('#menu_box').css({'right': 30})
+						}
+						
+						
+						$('body').css({'overflow-y':''});
+						
 					});
 					$('#infobox_trailer').fadeOut();
 					player.stopVideo();	
@@ -135,6 +147,28 @@ function initiate_trailer(){
 	player.playVideo();
 }
 
+
+function collapse_cell(){
+	$('.rank_container').css('left',0);
+	$('.rank_number').css('background-color','rgba(0,0,0,0.2)');
+	$('.data').hide();
+	$('.cell').css({'width':'100px','display':'inline-block'})
+	$('#content').css({'max-width':925,'margin':'0 auto'})
+	$('.numeral_divider').hide();
+	$('.rating_divider').show();
+}
+
+function expand_cell(){
+	$('.rank_container').css('left',-100);
+	$('.rank_number').css('background-color','');
+	$('.data').css('display','inline-block');
+	$('.cell').css({'width':'','display':''})
+	$('#content').css({'max-width':'','margin':''})
+	$('.numeral_divider').show();
+	$('.rating_divider').hide();
+}
+
+
 	
 </script>
   <style>
@@ -156,9 +190,9 @@ function initiate_trailer(){
 	
 	
 	.picture {display:inline-block; vertical-align:top; padding-right:25px;}
-	.picture img {border: 1px #EBEBEB solid;}
+	.picture img {border: 1px #EBEBEB solid; height:150px; weight:100px;}
 	
-	.data {display:inline-block; width:calc(100% - 125px); position: absolute; height: 95px; margin:auto; top:0; bottom:0;}
+	.data {display:inline; width:calc(100% - 125px); position: absolute; height: 95px; margin:auto; top:0; bottom:0;}
 	
 	.data-top {padding-bottom:15px;}
 	.data-mid {padding-bottom:15px; width:100%; font-size:0px;}
@@ -171,6 +205,8 @@ function initiate_trailer(){
 	.divider {width:100%; background-color:#d6d6d6; height:1px; margin:20px 0;}
     .divider_positioner{width:925px; margin:0 auto;}
 	.divider_number{margin-top: -12px; position: absolute; background: white; padding: 0 20px; margin-left: -20px; color: rgb(206, 206, 206);}
+
+	.rating_divider {display:none;}
 	
 	#overlay {position: fixed;
 z-index: 100;
@@ -212,10 +248,34 @@ font-size: 9pt;
 #infobox_poster {margin-right:25px; display:inline-block; vertical-align:top; background:black;}
 #poster_overlay {position: absolute; width: 200px; height: 285px; background: black; opacity: 0; line-height: 285px; color: white; text-align: center; font-size: 25pt; cursor:pointer;}
 
+#menu_list div {padding-top:10px;}
+
     </style>
 </header>
 
 <body>
+
+<!--- Avatar and Menu ----->
+<div id="menu_box" style="position:fixed; right:30px; top:30px; text-align:center;">
+	<div id="avatar">    	
+    	<img style="display:inline; width:50px; vertical-align:top; border:1px #eee solid;" src="https://pbs.twimg.com/profile_images/378800000576434411/517c60471147fcf9d4e25d37d6f70907_bigger.png" />
+    </div>
+    <div id="menu_list" style=" font-size:8pt; color:#d6d6d6; padding-right:5px;">
+        <div>
+            Review
+        </div>
+        <div>
+            Setting
+        </div>
+        <div id="collapse_cell_button" onClick="collapse_cell(); $(this).hide(); $('#build_cell_button').show();">
+        	Collapse
+        </div>
+        
+        <div style="display:none;" id="build_cell_button"  onClick="expand_cell(); $(this).hide(); $('#collapse_cell_button').show();">
+        	Build
+        </div>
+	</div>
+</div>
 
 <!--- Overlay BEGIN --->
 <div id="overlay">
@@ -387,9 +447,10 @@ font-size: 9pt;
 
 <div id="center">
   <div id="header" style="max-width:925px; margin:0 auto;">
-    <div id="logo" style="font-size:24pt; color:black; padding-right:50px;"> A / R </div>
-    <div id="logo" style="font-size:10.5pt;"> Spring / Week 7 </div>
-    <div> <span> </span> </div>
+      <div style="">
+            <div id="logo" style="font-size:24pt; color:black; padding-right:50px;"> A / R </div>
+            <div style="font-size:10.5pt;"> Spring / Week 7 </div>
+      </div>
   </div>
   
         
@@ -397,6 +458,18 @@ font-size: 9pt;
         
         <div id="content" >
         	
+            
+            
+                          <!------ DIVIDER -------> 
+            
+            <div class="divider rating_divider">
+            	<div class="divider_positioner"> 
+                	<div class="divider_number"> Highly Recommended </div>
+                </div>
+            </div>
+            
+            
+            
             <!------ TEMPLATE BEGINS -------> 
             <div class="cell" style="">
             	<div class="content_centering">
@@ -722,7 +795,7 @@ font-size: 9pt;
             
               <!------ DIVIDER -------> 
             
-            <div class="divider">
+            <div class="divider numeral_divider">
             	<div class="divider_positioner"> 
                 	<div class="divider_number"> 5 + </div>
                 </div>
@@ -850,25 +923,18 @@ font-size: 9pt;
         </div>
       </div>
     </div>
-                    
-                    <!-- Misc Data--> 
-                    <div class="data-bottom" style="font-size:9pt;">
-                    	<div>
-                            <span>Ranking:</span>
-                            <span style="color:#c70219;">-3</span>
-                        </div>
-                    </div>
-                </div>
-                	
-                
             	
-                
-            	</div>
-            </div>
             
             <!-- END template--> 
             
             
+                          <!------ DIVIDER -------> 
+            
+            <div class="divider rating_divider">
+            	<div class="divider_positioner"> 
+                	<div class="divider_number"> Recommended </div>
+                </div>
+            </div>
             
             
             
