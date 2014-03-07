@@ -16,11 +16,17 @@
                           function onYouTubeIframeAPIReady() {
                             player = new YT.Player('trailer_player', {
                               videoId: 'udDIkl6z8X0',
-							  playerVars: {'autohide': 1, 'modestbranding':1 },
+							  playerVars: {
+								  'autohide': 1,
+								  'modestbranding':1,
+								  'showinfo':0,
+								  'rel':0,
+								  'cc_load_policy':1,
+								  },
                               events: {
                                 'onReady': onPlayerReady,
                                 'onStateChange': onPlayerStateChange
-                              }
+								}
                             });
                           }
                     
@@ -32,8 +38,8 @@
 						  //    The function indicates that when playing a video (state=1),
 						  //    the player should play for six seconds and then stop.
 						  function onPlayerStateChange(event) {
-							if (event.data == YT.PlayerState.FINISHED) {
-							  $('#infobox_trailer').fadeOut();
+							if (event.data == YT.PlayerState.ENDED) {
+							  $('#infobox_trailer').fadeOut(1000);
 							}
 						  }
 						 
@@ -89,20 +95,28 @@
 
 <!-- Close trailer -->
 	$('body').on({
-			click: function(){		
-					$('#infobox_trailer').fadeOut(400,'',player.stopVideo());
-			}
-		}, '#infobox_trailer')
-	
-
-<!-- Close trailer hovering -->
-
-	$('body').on({
 			mouseenter: function(){		
 				$('#trailer_close_button').css('color','#c72109')
 			},
 			mouseleave: function(){		
 				$('#trailer_close_button').css('color','')
+			},
+			click: function(){		
+					$('#infobox_trailer').fadeOut(400,'',player.pauseVideo());
+			}
+		}, '#trailer_close_button')
+	
+
+<!-- Close trailer hovering -->
+
+	$('body').on({
+			click: function(){
+				if (player.getPlayerState()==1){
+					player.pauseVideo();
+				}
+				else { 
+					player.playVideo();
+				}
 			}
 		}, '#trailer_close_background')
 
@@ -138,6 +152,16 @@ function initiate_trailer(){
 }
 
 	
+
+function collapse_cell(){
+	$('.rank_container').hide();
+	$('.data').hide();
+	$('.cell').css({'width':'100px','display':'inline-block'})
+	$('#content').css({'max-width':925,'margin':'0 auto'})
+	$('.numeral_divider').hide();
+	$('.rating_divider').show();
+}
+
 </script>
   <style>
 	
@@ -173,6 +197,9 @@ function initiate_trailer(){
 	.divider {width:100%; background-color:#d6d6d6; height:1px; margin:20px 0;}
     .divider_positioner{width:925px; margin:0 auto;}
 	.divider_number{margin-top: -12px; position: absolute; background: white; padding: 0 20px; margin-left: -20px; color: rgb(206, 206, 206);}
+
+	.rating_divider {display:none;}
+	
 	
 	#overlay {position: fixed;
 z-index: 100;
@@ -206,19 +233,36 @@ font-size: 9pt;
 
 
 #infobox_trailer{display:none;}
-#infobox_trailer_positioner {position:absolute; top:0; left:0; height:100%; width:100%; background:black; z-index:2;  cursor:pointer;}
-#trailer_player {margin:auto; left:0; top:0; right:0; bottom:0; position:absolute; width:596px; height:335px;}
-#trailer_close_background {top:0; left:0; width:100%; height:100%; cursor:pointer;} 
+#infobox_trailer_positioner {position:absolute; top:0; left:0; height:100%; width:100%; z-index:2;  cursor:pointer;}
+#trailer_player {margin:auto; left:0; top:0; right:0; bottom:0; position:absolute; width:596px; height:335px; z-index:2;}
+#trailer_close_background {top:0; left:0; width:100%; height:100%; cursor:pointer;  background:black;} 
 #trailer_close_button {opacity:0.5; top:0; right: 15px;position: absolute;font-size: 25pt; cursor:pointer;}
 
 #infobox_poster {margin-right:25px; display:inline-block; vertical-align:top; background:black;}
 #poster_overlay {position: absolute; width: 200px; height: 285px; background: black; opacity: 0; line-height: 285px; color: white; text-align: center; font-size: 25pt; cursor:pointer;}
+
+
+#menu_list div {padding-top:10px;}
 
     </style>
 </header>
 
 <body>
 
+<!--- Avatar and Menu ----->
+<div id="menu_box" style="position:fixed; right:30px; top:30px; text-align:center;">
+	<div id="avatar">    	
+    	<img style="display:inline; width:50px; vertical-align:top; border:1px #eee solid;" src="https://pbs.twimg.com/profile_images/378800000576434411/517c60471147fcf9d4e25d37d6f70907_bigger.png" />
+    </div>
+    <div id="menu_list" style=" font-size:8pt; color:#d6d6d6; padding-right:5px;">
+        <div>
+            Review
+        </div>
+        <div>
+            Setting
+        </div>
+	</div>
+</div>
 <!--- Overlay BEGIN --->
 <div id="overlay">
   <div id="overlay_container"> 
@@ -296,7 +340,7 @@ font-size: 9pt;
 	
 	.overlay_user_avatar{display:inline-block; cursor:pointer;}
 	
-	.borders {display:inline-block; padding:10px;}
+	.scorebreakdown_borders {display:inline-block; padding-left:10px;}
 	#lvl4 {border-left:5px #66b968 solid;}
 	#lvl3 {border-left:5px #cee9b2 solid;}
 	#lvl2 {border-left:5px #ee5164 solid;}
@@ -306,7 +350,7 @@ font-size: 9pt;
     
     <div class="overlay_block" style="font-size:0;">
     	<div class="scorebreakdown_section">
-        	<div class="borders" id="lvl4" style="">
+        	<div class="scorebreakdown_borders" id="lvl4" style="">
             
                 <div class="overlay_user_avatar">
                     <img src="https://pbs.twimg.com/profile_images/421791630178283520/T41ywubG_bigger.jpeg">
@@ -332,7 +376,7 @@ font-size: 9pt;
         </div>
         
         <div class="scorebreakdown_section">
-        	<div class="borders" id="lvl3" style="">
+        	<div class="scorebreakdown_borders" id="lvl3" style="">
                 <div class="overlay_user_avatar">
                     <img src="https://pbs.twimg.com/profile_images/1602718531/profile_3_bigger.jpg">
                     <div class="overlay_username">-namename</div>
@@ -372,7 +416,7 @@ font-size: 9pt;
         </div>
         
         <div class="scorebreakdown_section">
-        	<div class="borders" id="lvl2" style="">
+        	<div class="scorebreakdown_borders" id="lvl2" style="">
                 <div class="overlay_user_avatar">
                     <img src="https://pbs.twimg.com/profile_images/288200615/AnyaFly_bigger.png">
                     <div class="overlay_username">-namename</div>
@@ -387,7 +431,7 @@ font-size: 9pt;
         </div>
         
         <div class="scorebreakdown_section">
-        	<div class="borders" id="lvl1" style="">
+        	<div class="scorebreakdown_borders" id="lvl1" style="">
                 <div class="overlay_user_avatar">
                     <img src="https://pbs.twimg.com/profile_images/423388161612324864/WkGlkx6V_bigger.png">
                     <div class="overlay_username">-namename</div>
@@ -472,6 +516,28 @@ font-size: 9pt;
     
     <!-- END template--> 
     
+            
+            
+                          <!------ DIVIDER -------> 
+            
+            <div class="divider rating_divider">
+            	<div class="divider_positioner"> 
+                	<div class="divider_number"> Recommended </div>
+                </div>
+            </div>
+            
+            
+            
+              <!------ DIVIDER -------> 
+            
+            <div class="divider numeral_divider">
+            	<div class="divider_positioner"> 
+                	<div class="divider_number"> 5 + </div>
+                </div>
+            </div>
+            
+            
+            
   </div>
 </div>
 </div>
