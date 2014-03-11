@@ -152,7 +152,7 @@ function collapse_cell(){
 	$('.rank_container').css('left',0);
 	$('.rank_number').css('background-color','rgba(0,0,0,0.2)');
 	$('.data').hide();
-	$('.cell').css({'width':'100px','display':'inline-block'})
+	$('.cell').css({'width':'100px','display':'inline-block','padding':'25px'})
 	$('#content').css({'max-width':925,'margin':'50px auto'})
 	$('.numeral_divider').hide();
 	$('.rating_divider').show();
@@ -162,7 +162,7 @@ function expand_cell(){
 	$('.rank_container').css('left',-100);
 	$('.rank_number').css('background-color','');
 	$('.data').css('display','inline-block');
-	$('.cell').css({'width':'','display':''})
+	$('.cell').css({'width':'','display':'','padding':''})
 	$('#content').css({'max-width':'','margin':''})
 	$('.numeral_divider').show();
 	$('.rating_divider').hide();
@@ -266,6 +266,11 @@ font-size: 9pt;
         </div>
         <div>
             Setting
+        </div>
+        <div>
+            <div style="padding-top:10px;">
+                Find User
+            </div>
         </div>
 	</div>
 </div>
@@ -447,11 +452,11 @@ font-size: 9pt;
       <div style="float:right; position:absolute; right:0; bottom:0;">
       
         <div id="collapse_cell_button" style=" font-size:10.5pt;" onClick="collapse_cell(); $(this).hide(); $('#build_cell_button').show();">
-        	Collapse
+        	Condense
         </div>
         
         <div id="build_cell_button" style="display:none; font-size:10.5pt;" onClick="expand_cell(); $(this).hide(); $('#collapse_cell_button').show();">
-        	Build
+        	Detailed
         </div>
       </div>
   </div>
