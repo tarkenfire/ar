@@ -1,0 +1,45 @@
+@CHARSET "ISO-8859-1";
+
+/*general styles*/
+*, *:after, *:before 
+{
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  
+}
+
+/*row styles*/
+.row
+{
+}
+
+.row:after
+{
+	content: "";
+	display: table;
+	clear: both;
+}
+
+/*column styles*/
+[class*='column-'] 
+{
+	float: left;
+	padding-right: 20px;
+}
+
+[class*='column-']:last-of-type
+{
+	padding-right: 0px;
+}
+
+/* sizing functions */
+.column-10{ width: 10%; }
+.column-20{ width: 20%; }
+.column-30{ width: 30%; }
+.column-40{ width: 40%; }
+.column-50{ width: 50%; }
+.column-60{ width: 60%; }
+.column-70{ width: 70%; }
+.column-80{ width: 80%; }
+.column-90{ width: 90%; }

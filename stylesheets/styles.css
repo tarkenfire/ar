@@ -1,7 +1,35 @@
 @CHARSET "ISO-8859-1";
 
-/*MAKE IT ALL GREEN*/
-*
+body
 {
-	background:"#00FF00";	
+	color: #6D6D6D; 
+	font-family: Segoe UI, Arial, Helvetica, sans-serif;
 }
+
+.logo
+{
+	font-size: 200%;
+}
+
+.header
+{
+	font-size:75%;
+}
+
+.text-pad-top
+{
+	padding-top:2em;
+}
+
+.avatar
+{
+	margin-top:2em;
+}
+
+
+.fake-content
+{
+	background:#d0d0d0;
+	height: 200px;
+}
+
