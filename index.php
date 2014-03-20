@@ -1,3 +1,5 @@
+<?php session_start(); ?>
+
 <!DOCTYPE html>
 <html>
 	<head>
@@ -9,6 +11,8 @@
 		
 	</head>
 	<body>
+
+	
 		<div class="row">	
 			<div class="large-2 columns">
 				<p class="logo">A / R</p>
@@ -19,13 +23,14 @@
 				<p class="text-pad-top">Spring / Week 1</p>
 			</div>
 			
+			
 			<?php if(isset($_SESSION['id'])): ?>
 				<div class="large-2 large-offset-5 columns">
-					<p class="right text-pad-top">@MuffinTheFox</p>
+					<p class="right text-pad-top">@ <?php echo $_SESSION['username'] ?></p>
 				</div>
 				
 				<div class="large-1 columns">
-					<img class="avatar" src="https://pbs.twimg.com/profile_images/429861192207982592/lxaKQ4Rp.jpeg">
+					<img class="avatar" src="<?php echo $_SESSION['avatar_url'] ?>">
 				</div>
 			<?php else: ?>
 				<div class="large-2 large-offset-7 columns">

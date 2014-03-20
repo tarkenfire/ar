@@ -33,7 +33,7 @@
 			$result = mysql_fetch_array($query);
 			
 			if(empty($result)){
-				$query = mysql_query("INSERT INTO users (oauth_provider, oauth_uid, username, avatar_url, oauth_token, oauth_secret) VALUES ('twitter', {$user_info->id}, '{$user_info->screen_name}', '{$user_info->profile_image_url}''{$access_token['oauth_token']}', '{$access_token['oauth_token_secret']}')");
+				$query = mysql_query("INSERT INTO users (oauth_provider, oauth_uid, username, avatar_url, oauth_token, oauth_secret) VALUES ('twitter', {$user_info->id}, '{$user_info->screen_name}', '{$user_info->profile_image_url}', '{$access_token['oauth_token']}', '{$access_token['oauth_token_secret']}')");
 				//seperatly update avatar to save my brain from single quote madness.
 				
 				$query = mysql_query("SELECT * FROM users WHERE id = " . mysql_insert_id());
@@ -51,7 +51,7 @@
 			$_SESSION['oauth_token'] = $result['oauth_token'];
 			$_SESSION['oauth_secret'] = $result['oauth_secret'];
 			
-			header('Location: index.html');
+			header('Location: index.php');
 		}
 
 	}
