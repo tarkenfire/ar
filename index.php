@@ -6,51 +6,69 @@
 		<meta charset="ISO-8859-1">
 		<title>A/R - Home</title>
 		
-		<link rel="stylesheet" type="text/css" href="stylesheets/foundation.min.css">
+ 		<link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/themes/smoothness/jquery-ui.css">
 		<link rel="stylesheet" type="text/css" href="stylesheets/styles.css">
 		
 	</head>
 	<body>
-
-	
-		<div class="row">	
-			<div class="large-2 columns">
-				<p class="logo">A / R</p>
-			</div>
-			
-			<div class="large-2 columns">
-				<!-- TODO: Make dynamic -->
-				<p class="text-pad-top">Spring / Week 1</p>
-			</div>
-			
-			
-			<?php if(isset($_SESSION['id'])): ?>
-				<div class="large-2 large-offset-5 columns">
-					<p class="right text-pad-top">@ <?php echo $_SESSION['username'] ?></p>
-				</div>
 				
-				<div class="large-1 columns">
-					<img class="avatar" src="<?php echo $_SESSION['avatar_url'] ?>">
-				</div>
-			<?php else: ?>
-				<div class="large-2 large-offset-7 columns">
-					<a class="right text-pad-top" href="login.php">Log in/Sign up</a>
-				</div>
-				
-				<div class="large-1 columns">
-					<img class="avatar" src="http://placehold.it/50x50">
-				</div>
-			<?php endif; ?>
-			
-		</div>	
-	
-		<div class="row">
-			<div class="large-12 columns">
-				<div class="fake-content">
-					<p>This is content</p>
-				</div>
+	<!--  BEGIN USER INFO -->									
+	<?php if(isset($_SESSION['id'])): ?>
+		<div id="menu_box">
+			<div id="avatar">    	
+		    	<img src="<?php echo $_SESSION['avatar_url'] ?>">
+		    </div>
+		    <div id="menu_list">
+		        <div>
+		            Review
+		        </div>
+		        <div>
+		            Setting
+		        </div>
 			</div>
 		</div>
 		
+	<?php else: ?>
+		
+		<div id="menu_box">
+			<div id="avatar">    	
+		    	<img src="http://placehold.it/50x50">
+		    </div>
+		    <div id="menu_list">
+		        <div>
+					<a href="login.php">Log in</a>
+		        </div>
+		        <div>
+		            Setting
+		        </div>
+			</div>
+		</div>
+	<?php endif; ?>
+	<!--  END USER INFO -->
+	
+	<!--  BEGIN HEADER -->	
+	<div id="center">
+		<div id="header">
+			<div id="logo"> A / R </div>
+			<div id="season"> Spring / Week 7 </div>
+		</div>
+  
+  	<!-- END HEADER -->
+  	
+  		<!-- BEGIN CONTENT -->
+  	
+	  	<div id="content">
+			
+			<?php
+				
+
+			?>
+			
+	  	</div>
+	  	 
+  	
+  	
+  		<!-- END CONTENT -->	
+	</div>
 	</body>
 </html>
