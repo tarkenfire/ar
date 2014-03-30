@@ -7,13 +7,11 @@
 	*/
 
 	require ("serverscripts/twitteroauth.php");
+	include 'serverscripts/DatabaseManager.php';
 	session_start();
 	
-	//db connection TODO: OBFUSCATE.
-	mysql_connect("localhost", 'mancm50_ar', 'RJA(3J6EkBD@zUxl1X');
-	mysql_select_db('mancm50_ar_data');
+	$database = new DatabaseManager();
 	
-
 	//Check for needed info from POST. If not found, return to login script.
 	if (!empty($_GET['oauth_verifier']) && !empty($_SESSION['oauth_token']) && !empty($_SESSION['oauth_token_secret'])){
 		//TODO: Key/Secret
@@ -29,18 +27,44 @@
 		}
 		else{
 			//TODO: These are unfiltered queries, they can be subject to SQL injection attacks. Fix it.
-			$query = mysql_query("SELECT * FROM users WHERE oauth_provider = 'twitter' AND oauth_uid = ". $user_info->id);
-			$result = mysql_fetch_array($query);
+			//$query = mysql_query("SELECT * FROM users WHERE oauth_provider = 'twitter' AND oauth_uid = ". $user_info->id);
+			//$result = mysql_fetch_array($query);
+			
+			$database->setQuery("SELECT * FROM users WHERE oauth_provider='twitter' AND oauth_uid = :uid");
+			$database->bind(":uid", $user_info->id);
+			
+			$result = $database->resultSet();
 			
 			if(empty($result)){
-				$query = mysql_query("INSERT INTO users (oauth_provider, oauth_uid, username, avatar_url, oauth_token, oauth_secret) VALUES ('twitter', {$user_info->id}, '{$user_info->screen_name}', '{$user_info->profile_image_url}', '{$access_token['oauth_token']}', '{$access_token['oauth_token_secret']}')");
-				//seperatly update avatar to save my brain from single quote madness.
+				//$query = mysql_query("INSERT INTO users (oauth_provider, oauth_uid, username, avatar_url, oauth_token, oauth_secret) VALUES ('twitter', {$user_info->id}, '{$user_info->screen_name}', '{$user_info->profile_image_url}', '{$access_token['oauth_token']}', '{$access_token['oauth_token_secret']}')");
 				
-				$query = mysql_query("SELECT * FROM users WHERE id = " . mysql_insert_id());
-				$result = mysql_fetch_array($query);
+				$database->setQuery("INSERT INTO users (oauth_provider, oauth_uid, username, avatar_url, oauth_token, oauth_secret) VALUES ('twitter', :uid. :username, :avatar, :oToken, :oSecret)");
+				
+				$database->bind(":uid", $user_info->id);
+				$database->bind(":username", $user_info->screen_name);
+				$database->bind(":avatar", $user_info->profile_image_url);
+				$database->bind(":oToken", $access_token['oauth_token']);
+				$database->bind(":oSecret", $access_token['oauth_token_secret']);
+				
+				$database->execute();
+				
+				$database->setQuery("SELECT * FROM users WHERE id = :lastid");
+				$database->bind("lastId", $database->lastInsertId);
+				
+				$result = $database->resultSet();
+				
+				//$query = mysql_query("SELECT * FROM users WHERE id = " . mysql_insert_id());
+				//$result = mysql_fetch_array($query);
 			} else {
 				// Update the tokens
-				$query = mysql_query("UPDATE users SET oauth_token = '{$access_token['oauth_token']}', oauth_secret = '{$access_token['oauth_token_secret']}' WHERE oauth_provider = 'twitter' AND oauth_uid = {$user_info->id}");
+				$database->setQuery("UPDATE users SET oauth_token = :oToken, oauth_secret = :oSecret");
+				
+				$database->bind(":oToken", $access_token['oauth_token']);
+				$database->bind(":oSecret", $access_token['oauth_token_secret']);
+				
+				$database->execute();
+				
+				//$query = mysql_query("UPDATE users SET oauth_token = '{$access_token['oauth_token']}', oauth_secret = '{$access_token['oauth_token_secret']}' WHERE oauth_provider = 'twitter' AND oauth_uid = {$user_info->id}");
 			}
 			
 			$_SESSION['id'] = $result['id'];
